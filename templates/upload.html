@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gridify - Upload Image</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="content">
+    <h1>Gridify</h1>
+    <h2>Upload an Image</h2>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" name="image" accept="image/*" required style="margin-bottom: 20px;"><br>
+      <label style="margin-bottom: 20px; display: inline-block;">
+        <input type="checkbox" name="bw"> Change to Black & White
+      </label><br><br>
+      <button type="submit" style="background-color: #add8e6; color: #000; padding: 10px 20px; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">Next</button>
+    </form>
+  </div>
+
+  <footer>
+    <a href="https://paypal.me/hunkyhitman" class="donate-btn" target="_blank" style="transform: scale(0.7); display: inline-block; margin-top: 10px;">☕ Donate via PayPal</a>
+
+    <!-- Google AdSense Ad -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6558643162196642"
+     crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-6558643162196642"
+         data-ad-slot="1342589912"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </footer>
+</body>
+</html>

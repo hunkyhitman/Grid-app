@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gridify</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    /* Basic styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding-bottom: 140px; /* space for footer */
+      background: url('/static/images/background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      color: #333;
+    }
+
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.9);
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 1;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 30px 15px;
+      text-align: center;
+      min-height: 90vh;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      max-width: 100%;
+      height: auto;
+      touch-action: manipulation; /* improve mobile touch */
+    }
+
+    button, input[type="number"], input[type="file"] {
+      padding: 12px 20px;
+      margin: 10px 5px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: auto;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #add8e6;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #91c3e0;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #f9f9f99a;
+      padding: 10px 5px;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+      z-index: 999;
+      font-size: 0.9rem;
+    }
+
+    .donate-btn {
+      background-color: #0070ba;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      transform: scale(0.7);
+      margin-top: 10px;
+      position: center;
+
+    /* Responsive tweaks */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      button, input[type="number"], input[type="file"] {
+        font-size: 1.1rem;
+        padding: 14px 20px;
+      }
+      footer {
+        font-size: 0.8rem;
+        padding: 8px 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="content">
+    <h1>Griddy App</h1>
+
+    <form onsubmit="return false">
+      <label for="squares">Number of squares per row/column:</label>
+      <input type="number" id="squares" value="3" min="1" max="20">
+      <button type="button" onclick="drawGrid()">Apply Grid</button>
+    </form>
+
+    <div class="image-container">
+      <canvas id="canvas"></canvas>
+    </div>
+
+    <br>
+    <button onclick="downloadCanvas()">Download Image with Grid</button>
+  </div>
+
+  <footer>
+    <a href="https://paypal.me/hunkyhitman" class="donate-btn" target="_blank">☕ Donate via PayPal</a>
+
+    <!-- Google AdSense Ad -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6558643162196642"
+     crossorigin="anonymous"></script>
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:728px;height:90px"
+         data-ad-client="ca-pub-6558643162196642"
+         data-ad-slot="1342589912"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </footer>
+
+  <script>
+    const imgSrc = "/static/uploads/{{ filename }}";
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+
+    img.src = imgSrc;
+    console.log("Image path:", imgSrc);
+
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
+    };
+
+    function drawGrid() {
+      const squares = parseInt(document.getElementById('squares').value);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0);
+
+      const stepX = canvas.width / squares;
+      const stepY = canvas.height / squares;
+
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 1;
+
+      for (let i = 1; i < squares; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i * stepX, 0);
+        ctx.lineTo(i * stepX, canvas.height);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, i * stepY);
+        ctx.lineTo(canvas.width, i * stepY);
+        ctx.stroke();
+      }
+    }
+
+    function downloadCanvas() {
+      const link = document.createElement('a');
+      link.download = 'grid-image.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    }
+  </script>
+</body>
+</html>
