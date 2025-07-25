@@ -1,0 +1,103 @@
+/* Basic styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding-bottom: 140px; /* space for footer */
+  background: url('/static/images/background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  color: #333;
+}
+
+.overlay {
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 30px 15px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+canvas {
+  width: 100% !important;
+  height: auto !important;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  max-width: 100%;
+  height: auto;
+  touch-action: manipulation; /* improve mobile touch */
+}
+
+button, input[type="number"], input[type="file"] {
+  padding: 12px 20px;
+  margin: 10px 5px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: auto;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #add8e6;
+  color: #000;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #91c3e0;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #f9f9f9;
+  padding: 10px 5px;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+  z-index: 999;
+  font-size: 0.9rem;
+}
+
+.donate-btn {
+  background-color: #0070ba;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transform: scale(0.7);
+  margin-top: 10px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+  button, input[type="number"], input[type="file"] {
+    font-size: 1.1rem;
+    padding: 14px 20px;
+  }
+  footer {
+    font-size: 0.8rem;
+    padding: 8px 5px;
+  }
+}
